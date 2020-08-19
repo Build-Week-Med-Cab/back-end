@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const authRouter = require('../routes/auth-router');
 
 const server = express();
 
@@ -11,6 +12,7 @@ server.use(helmet())
 server.use(morgan('dev'))
 
 // routes go here
+server.use('/api/auth', authRouter)
 
 server.use('/', (req, res) => {
   res.json({api: 'up and running'})
