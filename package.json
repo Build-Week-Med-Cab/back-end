@@ -1,0 +1,39 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon -r dotenv/config index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Build-Week-Med-Cab/back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Build-Week-Med-Cab/back-end/issues"
+  },
+  "homepage": "https://github.com/Build-Week-Med-Cab/back-end#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.5",
+    "morgan": "^1.10.0",
+    "pg": "^8.3.2",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "jest": "^26.4.0",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
+  }
+}
