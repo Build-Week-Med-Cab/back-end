@@ -1,7 +1,8 @@
 const db = require('../data/db-config');
 
 module.exports = {
-  add
+  add,
+  findOneBy
 }
 
 function findOneBy(filter){
