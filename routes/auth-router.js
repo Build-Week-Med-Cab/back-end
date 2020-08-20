@@ -9,13 +9,13 @@ const { userAlreadyExists, foundUser } = require('../middleware/users');
 
 router.post('/register', valadateUserCreation, userAlreadyExists, async (req, res, next) => {
   try{
-    const hash = bcrypt.hashSync(req.validUser.password, 12)
+    const hash = await bcrypt.hash(req.validUser.password, 12)
     req.validUser.password = hash
     const user = req.validUser
     console.log(user)
     const newUser = await Users.add({...user})
     const token = genarateToken(newUser)
-    res.status(201).json({message: `Welcome ${newUser.username}`, token})
+    return res.status(201).json({message: `Welcome ${newUser.username}`, token})
   }catch(error){
     next(error)
   }
