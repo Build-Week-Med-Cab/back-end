@@ -2,15 +2,15 @@ const db = require('../data/db-config');
 
 module.exports = {
   add,
-  findById
+  findOneBy
 }
 
-function findById(id){
-  return db('users').where({id: id}).first();
+function findOneBy(filter){
+  return db('users').where(filter).first();
 }
 
 async function add(user){
-  const [id] = await db('users').insert(user)
-  return findById(id)
+  const [id] = await db('users').insert(user, 'id')
+  return findOneBy({id: id});
 }
 
