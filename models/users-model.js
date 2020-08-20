@@ -6,11 +6,11 @@ module.exports = {
 }
 
 function findById(id){
-  return db('users').where({id: id}).first();
+  return db('users').where({id: id});
 }
 
 async function add(user){
   const [id] = await db('users').insert(user)
-  return findById(id)
+  return findById(id).first();
 }
 
