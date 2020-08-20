@@ -12,7 +12,6 @@ router.post('/register', valadateUserCreation, userAlreadyExists, async (req, re
     const hash = await bcrypt.hash(req.validUser.password, 12)
     req.validUser.password = hash
     const user = req.validUser
-    console.log(user)
     const newUser = await Users.add({...user})
     const token = genarateToken(newUser)
     return res.status(201).json({message: `Welcome ${newUser.username}`, token})
