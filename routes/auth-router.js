@@ -22,7 +22,7 @@ router.post('/register', valadateUserCreation, userAlreadyExists, async (req, re
 // "/login" endpoint
 router.post('/login', foundUser, async (req, res, next) => {
   try {
-    const validPassword = await bcrypt.compare(req.body.password, req.foundUser.password)
+    const validPassword =  bcrypt.compareSync(req.body.password, req.foundUser.password)
     if(!validPassword){
       res.status(401).json({messsage: 'invalid username or password'})
     }
