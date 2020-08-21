@@ -7,8 +7,8 @@ const users = require('../middleware/users');
 router.get('/', async (req, res, next) => {
   try {
     const recs = await User.findAllBy({user_id: req.token.user_id})
-    const fixedRecs = jsonParseSaved(recs)
-    
+    const fixedRecs = 
+    console.log(fixedRecs)
     if(fixedRecs.length === 0){
       res.status(200).json({message: "no data saved"})
     }
