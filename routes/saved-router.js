@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/saved-model');
-const { jsonParseSaved } = require('../middleware/savedWare');
+const { jsonParseSaved, userOwnsRec } = require('../middleware/savedWare');
 const users = require('../middleware/users');
 
 
@@ -29,7 +29,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', userOwnsRec, async (req, res, next) => {
   const {id} = req.params
   try {
     const removed = await User.removeById(id)

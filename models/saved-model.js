@@ -3,7 +3,8 @@ const db = require('../data/db-config');
 module.exports = {
   add,
   findAllBy,
-  removeById
+  removeById,
+  findOneBy
 }
 
 
