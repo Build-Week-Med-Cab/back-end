@@ -2,6 +2,8 @@
 
 ## Endpoints
 
+API requires a jsonwebtoken sent by the server to be sent in the Authorization header to be received.
+
 | Type   | Endpoint           | Token Required | Description                                                                                                                                                |
 |--------|--------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GET    | /                  | no             | Root Route                                                                                                                                                 |
