@@ -7,9 +7,9 @@ module.exports = {
   userOwnsRec
 }
 function jsonParseSaved(recs){
-    return recs.map(rec => {
-      rec.effects = JSON.parse(rec.effects)
-      rec.helps = JSON.parse(rec.helps)
+    return recs.map(async rec => {
+      rec.effects = await JSON.parse(rec.effects)
+      rec.helps = await JSON.parse(rec.helps)
       return rec
     })
   }
