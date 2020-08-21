@@ -5,17 +5,25 @@ const users = require('../middleware/users');
 
 // Need to fix request for live server.
 router.get('/', async (req, res, next) => {
+  let fixedRecs = []
   try {
     const recs = await User.findAllBy({user_id: req.token.user_id})
     console.log(recs)
-    // const fixedRecs = recs.map( rec => {
-    //   return {...rec, effects: JSON.parse(rec.effects), helps: JSON.parse(rec.helps)}
-    // })
-    // console.log(fixedRecs)
+    if(process.env.DB_ENV === 'development'){
+      fixedRecs = recs.map( rec => {
+      return {...rec, effects: JSON.parse(rec.effects), helps: JSON.parse(rec.helps)}
+    })
+    }
+    
     if(recs.length === 0){
       res.status(200).json({message: "no data saved"})
     }
-    res.status(200).json(recs)
+    if(process.env.DB_ENV === 'development'){
+      res.status(200).json(fixedRecs)
+    }else{
+      res.status(200).json(recs)
+    }
+    
   } catch (error) {
     next(error)
   }
