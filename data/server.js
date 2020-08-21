@@ -3,7 +3,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const authRouter = require('../routes/auth-router');
-
+const savedRouter = require('../routes/saved-router');
+const {requireToken} = require('../middleware/authUser');
 const server = express();
 
 server.use(express.json())
@@ -13,6 +14,7 @@ server.use(morgan('dev'))
 
 // routes go here
 server.use('/api/auth', authRouter)
+server.use('/api/saved', requireToken, savedRouter)
 
 server.use('/', (req, res) => {
   res.json({api: 'up and running'})
