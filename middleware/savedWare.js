@@ -6,13 +6,18 @@ module.exports = {
   jsonParseSaved,
   userOwnsRec
 }
-function jsonParseSaved(recs){
-    return recs.map(async rec => {
+async function jsonParseSaved(recs){
+    try {
+      recs.map(async rec => {
       rec.effects = await JSON.parse(rec.effects)
       rec.helps = await JSON.parse(rec.helps)
       return rec
-    })
-  }
+      }) 
+    }catch(error) {
+      console.log(error)
+    } 
+    }
+  
 
   async function userOwnsRec(req, res, next){
     const {id} = req.params
