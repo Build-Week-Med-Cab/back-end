@@ -3,14 +3,13 @@ const User = require('../models/saved-model');
 const { jsonParseSaved, userOwnsRec } = require('../middleware/savedWare');
 const users = require('../middleware/users');
 
-
+// Need to fix request for live server.
 router.get('/', async (req, res, next) => {
   try {
     const recs = await User.findAllBy({user_id: req.token.user_id})
+    console.log(recs)
     const fixedRecs = recs.map( rec => {
-      rec.effects =  JSON.parse(rec.effects)
-      rec.helps =  JSON.parse(rec.helps)
-      return rec
+      return {...rec, effects: JSON.parse(rec.effects), helps: JSON.parse(rec.helps)}
     })
     console.log(fixedRecs)
     if(fixedRecs.length === 0){
