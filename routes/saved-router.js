@@ -3,13 +3,13 @@ const User = require('../models/saved-model');
 const { jsonParseSaved, userOwnsRec } = require('../middleware/savedWare');
 const users = require('../middleware/users');
 
-// Need to fix request for live server.
+
 router.get('/', async (req, res, next) => {
   let fixedRecs = []
   try {
     const recs = await User.findAllBy({user_id: req.token.user_id})
-    console.log(recs)
-    if(process.env.DB_ENV === 'development'){
+    //sqlite needs to use this to parse out the array. pg will do it on its own.
+    if(process.env.DB_ENV !== 'production'){
       fixedRecs = recs.map( rec => {
       return {...rec, effects: JSON.parse(rec.effects), helps: JSON.parse(rec.helps)}
     })
@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
     if(recs.length === 0){
       res.status(200).json({message: "no data saved"})
     }
-    if(process.env.DB_ENV === 'development'){
+    if(process.env.DB_ENV !== 'production'){
       res.status(200).json(fixedRecs)
     }else{
       res.status(200).json(recs)
@@ -47,7 +47,7 @@ router.delete('/:id', userOwnsRec, async (req, res, next) => {
     if(removed === 1){
       res.json({message: "remove success"})
     }else{
-      res.json({message: "item not found"})
+      res.status(404).json({message: "item not found"})
     }
   } catch (error) {
     next(error)

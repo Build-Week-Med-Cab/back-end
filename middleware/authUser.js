@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const requireToken = async (req, res, next) => {
   const {authorization} = req.headers;
-  const secret = process.env.JWT_SECRET;
+  const secret = process.env.JWT_SECRET || 'yayeet';
 
   if(!authorization){
     res.status(401).json({message: "no token provided"})

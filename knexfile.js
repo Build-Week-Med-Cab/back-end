@@ -31,7 +31,7 @@ module.exports = {
       directory: './data/migrations'
     },
     seeds: {
-      directory: './data/seeds'
+      directory: './data/seeds/testing'
     },
     pool: {
     afterCreate: (conn, done) => {
