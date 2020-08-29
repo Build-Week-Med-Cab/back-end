@@ -2,7 +2,8 @@ const db = require('../data/db-config');
 
 module.exports = {
   add,
-  findOneBy
+  findOneBy,
+  find
 }
 
 function findOneBy(filter){
@@ -12,5 +13,9 @@ function findOneBy(filter){
 async function add(user){
   const [id] = await db('users').insert(user, 'id')
   return findOneBy({id: id});
+}
+
+function find(){
+  return db('users')
 }
 

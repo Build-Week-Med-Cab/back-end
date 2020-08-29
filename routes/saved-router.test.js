@@ -25,7 +25,7 @@ describe("***Saved-router***", () => {
 
   describe('POST /', () => {
     beforeAll( async () => {
-    save = {user_id: 1, strain: 'test strain', strain_type: "test type", description: 'test dec', effects: ['test effect'], helps: ['test helps']}
+    save = { strain: 'test strain', strain_type: "test type", description: 'test dec', effects: ['test effect'], helps: ['test helps']}
       res = await request(server).post('/api/saved/').send(save).set("Authorization", user.body.token)
     })
     it('should have a status code of 201', () => {
@@ -35,7 +35,7 @@ describe("***Saved-router***", () => {
       expect(res.type).toBe("application/json")
     })
     it('should equal object entered plus an id', () => {
-      expect(res.body).toEqual({...save, id: 1})
+      expect(res.body.id).toBe(1)
     })
   })
 
